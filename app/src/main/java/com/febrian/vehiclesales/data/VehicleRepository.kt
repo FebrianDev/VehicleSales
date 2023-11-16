@@ -3,20 +3,33 @@ package com.febrian.vehiclesales.data
 import com.febrian.vehiclesales.data.database.VehicleDao
 import com.febrian.vehiclesales.data.entity.Car
 import com.febrian.vehiclesales.data.entity.MotorCycle
-import com.febrian.vehiclesales.data.entity.Vehicle
+import com.febrian.vehiclesales.utils.createDummyCarList
+import com.febrian.vehiclesales.utils.createDummyMotorCycleList
 import kotlinx.coroutines.flow.Flow
 
-class VehicleRepository (private val vehicleDao: VehicleDao) {
+class VehicleRepository(private val vehicleDao: VehicleDao) {
 
-    suspend fun insertVehicle(car: Car){
-        vehicleDao.insertVehicle(car)
+    suspend fun insertCars() {
+        vehicleDao.insertCars(createDummyCarList())
     }
 
-    suspend fun insertVehicle(motorCycle: MotorCycle){
-        vehicleDao.insertVehicle(motorCycle)
+    suspend fun insertMotorCycles() {
+        vehicleDao.insertMotorCycles(createDummyMotorCycleList())
     }
 
-    fun getAllVehicle() : Flow<List<Vehicle>>{
-        return vehicleDao.getAllVehicle()
+    fun getAllCars(): Flow<List<Car>> {
+        return vehicleDao.getAllCars()
+    }
+
+    fun getAllMotorCycles(): Flow<List<MotorCycle>> {
+        return vehicleDao.getAllMotorCycles()
+    }
+
+   suspend fun deleteAllCars() {
+        vehicleDao.deleteAllCars()
+    }
+
+   suspend fun deleteAllMotorCycles() {
+        vehicleDao.deleteAllMotorCycles()
     }
 }

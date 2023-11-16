@@ -82,4 +82,7 @@ dependencies {
     annotationProcessor("androidx.room:room-compiler:$roomVersion")
     kapt("androidx.room:room-compiler:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")
+
+    //icons
+    implementation("androidx.compose.material:material-icons-extended")
 }
