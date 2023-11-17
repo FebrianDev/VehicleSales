@@ -12,6 +12,7 @@ fun createDummyCarList(): List<Car> {
             machine = "EngineA",
             capacity = 2000,
             type = "Sedan",
+            name = "Car A",
             year = 2022,
             color = 0xFF0000,
             price = 25000
@@ -22,6 +23,7 @@ fun createDummyCarList(): List<Car> {
             machine = "EngineB",
             capacity = 1500,
             type = "SUV",
+            name = "Car B",
             year = 2021,
             color = 0x00FF00,
             price = 30000
@@ -32,43 +34,13 @@ fun createDummyCarList(): List<Car> {
             machine = "EngineC",
             capacity = 2500,
             type = "Hatchback",
+            name = "Car C",
             year = 2020,
             color = 0x0000FF,
             price = 20000
         )
     )
 
-    // Add more dummy data
-    dummyCars.add(
-        Car(
-            machine = "EngineD",
-            capacity = 1800,
-            type = "Coupe",
-            year = 2023,
-            color = 0xFFFF00,
-            price = 35000
-        )
-    )
-    dummyCars.add(
-        Car(
-            machine = "EngineE",
-            capacity = 2200,
-            type = "Convertible",
-            year = 2021,
-            color = 0x00FFFF,
-            price = 40000
-        )
-    )
-    dummyCars.add(
-        Car(
-            machine = "EngineF",
-            capacity = 1900,
-            type = "Electric",
-            year = 2022,
-            color = 0xFF00FF,
-            price = 30000
-        )
-    )
 
     return dummyCars
 }
@@ -81,6 +53,7 @@ fun createDummyMotorCycleList(): List<MotorCycle> {
             machine = "EngineX",
             suspensionType = "Front Fork",
             transmissionType = "Manual",
+            name = "Motor A",
             year = 2022,
             color = 0xFF0000,
             price = 15000
@@ -91,6 +64,7 @@ fun createDummyMotorCycleList(): List<MotorCycle> {
             machine = "EngineY",
             suspensionType = "Rear Mono-shock",
             transmissionType = "Automatic",
+            name = "Motor B",
             year = 2021,
             color = 0x00FF00,
             price = 18000
@@ -101,42 +75,13 @@ fun createDummyMotorCycleList(): List<MotorCycle> {
             machine = "EngineZ",
             suspensionType = "Telescopic",
             transmissionType = "Manual",
+            name = "Motor C",
             year = 2020,
             color = 0x0000FF,
             price = 12000
         )
     )
 
-    dummyMotorCycles.add(
-        MotorCycle(
-            machine = "EngineW",
-            suspensionType = "Inverted Fork",
-            transmissionType = "Manual",
-            year = 2023,
-            color = 0xFFFF00,
-            price = 20000
-        )
-    )
-    dummyMotorCycles.add(
-        MotorCycle(
-            machine = "EngineV",
-            suspensionType = "Dual Shock",
-            transmissionType = "Automatic",
-            year = 2022,
-            color = 0x00FFFF,
-            price = 17000
-        )
-    )
-    dummyMotorCycles.add(
-        MotorCycle(
-            machine = "EngineU",
-            suspensionType = "Upside-down Fork",
-            transmissionType = "Manual",
-            year = 2021,
-            color = 0xFF00FF,
-            price = 16000
-        )
-    )
 
     return dummyMotorCycles
 }

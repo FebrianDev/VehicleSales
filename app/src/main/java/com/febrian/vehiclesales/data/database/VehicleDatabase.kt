@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import com.febrian.vehiclesales.data.entity.Car
 import com.febrian.vehiclesales.data.entity.MotorCycle
 
-@Database(entities = [Car::class, MotorCycle::class], version = 2)
+@Database(entities = [Car::class, MotorCycle::class], version = 3)
 abstract class VehicleDatabase : RoomDatabase() {
 
     abstract val vehicleDao: VehicleDao
