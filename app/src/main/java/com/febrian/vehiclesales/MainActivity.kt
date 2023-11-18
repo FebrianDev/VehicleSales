@@ -1,9 +1,11 @@
 package com.febrian.vehiclesales
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -36,7 +38,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.rememberNavController
 import com.febrian.vehiclesales.ui.components.OrderSection
+import com.febrian.vehiclesales.ui.navigation.BottomNavigationBar
+import com.febrian.vehiclesales.ui.navigation.NavigationSetup
 import com.febrian.vehiclesales.ui.screen.ItemCar
 import com.febrian.vehiclesales.ui.screen.ItemMotorCycle
 import com.febrian.vehiclesales.ui.screen.VehicleViewModel
@@ -53,6 +58,7 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var preferenceManager: PreferenceManager
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,19 +76,7 @@ class MainActivity : ComponentActivity() {
                         vehicleViewModel.insertAllVehicles()
                     }
 
-                    vehicleViewModel.getAllCars()
-                    vehicleViewModel.getAllMotorCycles()
-
-                    var showTypeVehicle by remember {
-                        mutableStateOf(false)
-                    }
-
-                    var typeVehicle by remember {
-                        mutableStateOf(TypeVehicle.All)
-                    }
-
-                    val listCar = vehicleViewModel.getCars.collectAsState()
-                    val listMotorCycle = vehicleViewModel.getMotorCycles.collectAsState()
+                    val navController = rememberNavController()
 
                     Scaffold(floatingActionButton = {
                         FloatingActionButton(
@@ -97,86 +91,12 @@ class MainActivity : ComponentActivity() {
                                 tint = MaterialTheme.colorScheme.primary
                             )
                         }
-                    }) { padding ->
-                        LazyColumn(
-                            modifier = Modifier
-                                .padding(padding)
-                                .fillMaxWidth()
-                        ) {
+                    }, bottomBar = { BottomNavigationBar(navController) }) { padding ->
 
-                            item {
-                                Row(
-                                    modifier = Modifier
-                                        .padding(16.dp)
-                                        .fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.SpaceBetween
-                                ) {
-                                    Text(
-                                        "Vehicle Sales",
-                                        fontSize = 24.sp,
-                                        fontWeight = FontWeight.Bold
-                                    )
+                        NavigationSetup(
+                            navController = navController
+                        )
 
-                                    Icon(
-                                        Icons.Filled.Sort,
-                                        "Sort Item",
-                                        tint = MaterialTheme.colorScheme.primary,
-                                        modifier = Modifier.clickable {
-                                            showTypeVehicle = !showTypeVehicle
-                                        }
-                                    )
-                                }
-                            }
-
-                            item {
-                                AnimatedVisibility(
-                                    visible = showTypeVehicle,
-                                    enter = fadeIn() + slideInVertically(),
-                                    exit = fadeOut() + slideOutVertically()
-                                ) {
-                                    OrderSection(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .padding(horizontal = 16.dp),
-                                        typeVehicle
-                                    ) { type ->
-                                        typeVehicle = type
-                                    }
-
-                                }
-                            }
-
-                            if (typeVehicle == TypeVehicle.Car || typeVehicle == TypeVehicle.All) {
-                                item {
-                                    Text(
-                                        "Car",
-                                        fontSize = 18.sp,
-                                        fontWeight = FontWeight.Bold,
-                                        modifier = Modifier.padding(start = 16.dp)
-                                    )
-                                }
-
-                                items(listCar.value) {
-                                    ItemCar(it)
-                                }
-                            }
-
-                            if (typeVehicle == TypeVehicle.MotorCycle || typeVehicle == TypeVehicle.All) {
-                                item {
-                                    Text(
-                                        "Motorcycle",
-                                        fontSize = 18.sp,
-                                        fontWeight = FontWeight.Bold,
-                                        modifier = Modifier.padding(start = 16.dp)
-                                    )
-                                }
-
-                                items(listMotorCycle.value) {
-                                    ItemMotorCycle(it)
-                                }
-
-                            }
-                        }
                     }
 
                 }
