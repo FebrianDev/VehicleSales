@@ -1,6 +1,7 @@
-package com.febrian.vehiclesales.ui.screen
+package com.febrian.vehiclesales.ui.item
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,10 +11,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,20 +20,31 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.febrian.vehiclesales.R
 import com.febrian.vehiclesales.data.entity.Car
+import com.febrian.vehiclesales.ui.components.ButtonComposable
+import com.febrian.vehiclesales.ui.components.TextBodyNormal
+import com.febrian.vehiclesales.ui.components.TextSubtitleSmall
+import com.febrian.vehiclesales.ui.navigation.Screen
 
 @Composable
-fun ItemCar(car: Car) {
+fun ItemCar(
+    textButton: String,
+    car: Car,
+    navController: NavController = rememberNavController(),
+    onBuy: () -> Unit
+) {
     Card(
         modifier = Modifier
             .padding(vertical = 16.dp, horizontal = 24.dp)
             .fillMaxWidth()
-            .wrapContentHeight(),
+            .wrapContentHeight()
+            .clickable {
+                navController.navigate(Screen.DetailCarScreen.route + "?id=${car.id}")
+            },
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White)
     ) {
@@ -61,24 +71,21 @@ fun ItemCar(car: Car) {
             ) {
 
                 Column {
-                    Text(
-                        car.name,
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = 16.sp
-                    )
+                    TextSubtitleSmall(text = car.name)
                     Spacer(modifier = Modifier.height(4.dp))
-                    Text(
-                        "${car.machine} | ${car.type} | ${car.year}",
-                        fontSize = 14.sp,
-                        fontWeight = FontWeight.Normal,
-                        textAlign = TextAlign.Center
-                    )
+                    TextBodyNormal(text = "${car.machine} | ${car.type} | ${car.year}")
 
                 }
 
-                Button(onClick = { }) {
-                    Text(text = "Buy Car")
-                }
+//                Button(onClick = onBuy, enabled = textButton != "Purchased") {
+//                    Text(text = textButton)
+//                }
+
+                ButtonComposable(
+                    textButton = textButton,
+                    enabled = textButton != "Purchased",
+                    onBuy = onBuy
+                )
             }
         }
     }

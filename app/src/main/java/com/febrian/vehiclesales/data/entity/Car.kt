@@ -9,8 +9,8 @@ data class Car(
     var machine: String = "",
     var capacity: Int = 0,
     var type: String = "",
-    override var name: String,
+    override var name: String = "",
     override var year: Int = 0,
-    override var color: Long = 0L,
+    override var color: Int = 0,
     override var price: Int = 0
 ) : Vehicle(id, name, year, color, price)

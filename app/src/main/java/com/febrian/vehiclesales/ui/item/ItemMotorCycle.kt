@@ -1,6 +1,7 @@
-package com.febrian.vehiclesales.ui.screen
+package com.febrian.vehiclesales.ui.item
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,7 +11,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
@@ -25,16 +25,27 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.febrian.vehiclesales.R
 import com.febrian.vehiclesales.data.entity.MotorCycle
+import com.febrian.vehiclesales.ui.components.ButtonComposable
+import com.febrian.vehiclesales.ui.navigation.Screen
 
 @Composable
-fun ItemMotorCycle(motorCycle: MotorCycle) {
+fun ItemMotorCycle(
+    textButton: String,
+    motorCycle: MotorCycle,
+    navController: NavController,
+    onBuy: () -> Unit
+) {
     Card(
         modifier = Modifier
             .padding(vertical = 16.dp, horizontal = 24.dp)
             .fillMaxWidth()
-            .wrapContentHeight(),
+            .wrapContentHeight()
+            .clickable {
+                navController.navigate(Screen.DetailMotorScreen.route + "?id=${motorCycle.id}")
+            },
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White)
     ) {
@@ -76,9 +87,11 @@ fun ItemMotorCycle(motorCycle: MotorCycle) {
 
                 }
 
-                Button(onClick = { }) {
-                    Text(text = "Buy Motor")
-                }
+                ButtonComposable(
+                    textButton = textButton,
+                    enabled = textButton != "Purchased",
+                    onBuy = onBuy
+                )
             }
         }
     }

@@ -23,17 +23,23 @@ interface VehicleDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMotorCycles(motorCycles: List<MotorCycle>)
 
-    @Query("SELECT * FROM car where isPurchased=:isPurchased")
-    fun getAllCars(isPurchased : Boolean): Flow<List<Car>>
-
-    @Query("SELECT * FROM motorcycle where isPurchased=:isPurchased")
-    fun getAllMotorCycles(isPurchased : Boolean): Flow<List<MotorCycle>>
-
     @Query("DELETE FROM car")
     suspend fun deleteAllCars()
 
     @Query("DELETE FROM motorcycle")
     suspend fun deleteAllMotorCycles()
+
+    @Query("SELECT * FROM car where isPurchased=:isPurchased")
+    fun getAllCars(isPurchased: Boolean): Flow<List<Car>>
+
+    @Query("SELECT * FROM motorcycle where isPurchased=:isPurchased")
+    fun getAllMotorCycles(isPurchased: Boolean): Flow<List<MotorCycle>>
+
+    @Query("SELECT * FROM car where id=:id")
+    fun getCarById(id: Int): Flow<Car>
+
+    @Query("SELECT * FROM motorcycle where id=:id")
+    fun getMotorCycleById(id: Int): Flow<MotorCycle>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun buyCar(sale: SaleCar)
@@ -54,4 +60,10 @@ interface VehicleDao {
     @Transaction
     @Query("SELECT * FROM salemotorcycle")
     fun getReceiptSaleMotor(): Flow<List<SaleWithMotor>>
+
+    @Query("DELETE FROM salecar")
+    suspend fun deleteAllSaleCar()
+
+    @Query("DELETE FROM salemotorcycle")
+    suspend fun deleteAllSaleMotorCycles()
 }

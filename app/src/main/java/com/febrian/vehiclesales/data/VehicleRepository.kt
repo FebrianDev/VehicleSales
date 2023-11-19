@@ -21,12 +21,20 @@ class VehicleRepository(private val vehicleDao: VehicleDao) {
         vehicleDao.insertMotorCycles(createDummyMotorCycleList())
     }
 
-    fun getAllCars(isPurchased : Boolean): Flow<List<Car>> {
+    fun getAllCars(isPurchased: Boolean): Flow<List<Car>> {
         return vehicleDao.getAllCars(isPurchased)
     }
 
-    fun getAllMotorCycles(isPurchased : Boolean): Flow<List<MotorCycle>> {
+    fun getAllMotorCycles(isPurchased: Boolean): Flow<List<MotorCycle>> {
         return vehicleDao.getAllMotorCycles(isPurchased)
+    }
+
+    fun getCarById(id: Int): Flow<Car> {
+        return vehicleDao.getCarById(id)
+    }
+
+    fun getMotorCycleById(id: Int): Flow<MotorCycle> {
+        return vehicleDao.getMotorCycleById(id)
     }
 
     suspend fun deleteAllCars() {
@@ -53,5 +61,13 @@ class VehicleRepository(private val vehicleDao: VehicleDao) {
 
     fun getReceiptSaleMotor(): Flow<List<SaleWithMotor>> {
         return vehicleDao.getReceiptSaleMotor()
+    }
+
+    suspend fun deleteAllSaleCar() {
+        vehicleDao.deleteAllSaleCar()
+    }
+
+    suspend fun deleteAllSaleMotorCycles() {
+        vehicleDao.deleteAllSaleMotorCycles()
     }
 }

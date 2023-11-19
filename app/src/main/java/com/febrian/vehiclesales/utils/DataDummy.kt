@@ -1,5 +1,7 @@
 package com.febrian.vehiclesales.utils
 
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import com.febrian.vehiclesales.data.entity.Car
 import com.febrian.vehiclesales.data.entity.MotorCycle
 
@@ -14,7 +16,7 @@ fun createDummyCarList(): List<Car> {
             type = "Sedan",
             name = "Car A",
             year = 2022,
-            color = 0xFF0000,
+            color = Color(0xFF000000).toArgb(),
             price = 25000
         )
     )
@@ -25,7 +27,7 @@ fun createDummyCarList(): List<Car> {
             type = "SUV",
             name = "Car B",
             year = 2021,
-            color = 0x00FF00,
+            color = Color(0xFF00FF00).toArgb(),
             price = 30000
         )
     )
@@ -36,7 +38,7 @@ fun createDummyCarList(): List<Car> {
             type = "Hatchback",
             name = "Car C",
             year = 2020,
-            color = 0x0000FF,
+            color = Color(0xFF0000FF).toArgb(),
             price = 20000
         )
     )
@@ -55,7 +57,7 @@ fun createDummyMotorCycleList(): List<MotorCycle> {
             transmissionType = "Manual",
             name = "Motor A",
             year = 2022,
-            color = 0xFF0000,
+            color = Color(0xFF000000).toArgb(),
             price = 15000
         )
     )
@@ -66,7 +68,7 @@ fun createDummyMotorCycleList(): List<MotorCycle> {
             transmissionType = "Automatic",
             name = "Motor B",
             year = 2021,
-            color = 0x00FF00,
+            color = Color(0xFF00FF00).toArgb(),
             price = 18000
         )
     )
@@ -77,7 +79,7 @@ fun createDummyMotorCycleList(): List<MotorCycle> {
             transmissionType = "Manual",
             name = "Motor C",
             year = 2020,
-            color = 0x0000FF,
+            color = Color(0xFF0000FF).toArgb(),
             price = 12000
         )
     )
