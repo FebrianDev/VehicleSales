@@ -66,7 +66,6 @@ fun HomeScreen(
                 )
             }
 
-
             item {
                 TextSubtitleMedium(
                     text = "Car",
@@ -79,7 +78,6 @@ fun HomeScreen(
                     navController.navigate(Screen.DetailCarScreen.route + "?id=${it.id}")
                 }
             }
-
 
             item {
                 TextSubtitleMedium(
