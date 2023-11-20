@@ -7,10 +7,10 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun ButtonComposable(
-    textButton : String = "",
+    textButton: String = "",
     enabled: Boolean = true,
     modifier: Modifier = Modifier,
-    onBuy : () -> Unit
+    onBuy: () -> Unit
 ) {
     Button(onClick = onBuy, enabled = enabled, modifier = modifier) {
         Text(text = textButton)

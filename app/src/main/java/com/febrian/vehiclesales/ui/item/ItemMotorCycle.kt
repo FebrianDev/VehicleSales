@@ -25,27 +25,22 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.febrian.vehiclesales.R
 import com.febrian.vehiclesales.data.entity.MotorCycle
 import com.febrian.vehiclesales.ui.components.ButtonComposable
-import com.febrian.vehiclesales.ui.navigation.Screen
 
 @Composable
 fun ItemMotorCycle(
     textButton: String,
     motorCycle: MotorCycle,
-    navController: NavController,
-    onBuy: () -> Unit
+    onNavigate: () -> Unit
 ) {
     Card(
         modifier = Modifier
             .padding(vertical = 16.dp, horizontal = 24.dp)
             .fillMaxWidth()
             .wrapContentHeight()
-            .clickable {
-                navController.navigate(Screen.DetailMotorScreen.route + "?id=${motorCycle.id}")
-            },
+            .clickable(onClick = onNavigate),
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White)
     ) {
@@ -90,7 +85,7 @@ fun ItemMotorCycle(
                 ButtonComposable(
                     textButton = textButton,
                     enabled = textButton != "Purchased",
-                    onBuy = onBuy
+                    onBuy = onNavigate
                 )
             }
         }

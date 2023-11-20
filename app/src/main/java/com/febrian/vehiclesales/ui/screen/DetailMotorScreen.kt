@@ -14,7 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBackIos
+import androidx.compose.material.icons.automirrored.filled.ArrowBackIos
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -55,7 +55,7 @@ fun DetailMotorScreen(
     Column(modifier = Modifier.padding(16.dp)) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Icon(
-                Icons.Filled.ArrowBackIos,
+                Icons.AutoMirrored.Filled.ArrowBackIos,
                 "Arrow Back",
                 tint = Color.Black,
                 modifier = Modifier.clickable {
@@ -67,6 +67,7 @@ fun DetailMotorScreen(
         }
 
         Spacer(modifier = Modifier.height(16.dp))
+
         Image(
             painter = painterResource(id = R.drawable.motor),
             contentDescription = "Car",
@@ -78,6 +79,7 @@ fun DetailMotorScreen(
 
         TextSubtitleSmall(text = motor.name)
         TextBodyNormal(text = "${motor.machine} | ${motor.transmissionType} | ${motor.suspensionType}")
+
         Row(modifier = Modifier.padding(top = 2.dp)) {
             Box(
                 modifier = Modifier

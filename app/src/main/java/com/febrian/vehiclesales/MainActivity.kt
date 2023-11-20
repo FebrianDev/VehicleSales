@@ -8,11 +8,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -35,7 +30,6 @@ class MainActivity : ComponentActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -54,29 +48,12 @@ class MainActivity : ComponentActivity() {
 
                     val navController = rememberNavController()
 
-                    Scaffold(floatingActionButton = {
-                        FloatingActionButton(
-                            onClick = {
-                                vehicleViewModel.deleteAllVehicles()
-                                preferenceManager.putString(keyInsertData, "")
-                                preferenceManager.putString(keyInsertData, "keyInsertData")
-                                vehicleViewModel.insertAllVehicles()
-                            },
-                        ) {
-                            Icon(
-                                Icons.Filled.Delete,
-                                "Clear Data Dummy",
-                                tint = MaterialTheme.colorScheme.primary
-                            )
-                        }
-                    }, bottomBar = { BottomNavigationBar(navController) }) {
-
+                    Scaffold(bottomBar = { BottomNavigationBar(navController) }) {
                         NavigationSetup(
                             navController = navController
                         )
 
                     }
-
                 }
             }
         }

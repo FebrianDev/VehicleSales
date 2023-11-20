@@ -21,30 +21,24 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.febrian.vehiclesales.R
 import com.febrian.vehiclesales.data.entity.Car
 import com.febrian.vehiclesales.ui.components.ButtonComposable
 import com.febrian.vehiclesales.ui.components.TextBodyNormal
 import com.febrian.vehiclesales.ui.components.TextSubtitleSmall
-import com.febrian.vehiclesales.ui.navigation.Screen
 
 @Composable
 fun ItemCar(
     textButton: String,
     car: Car,
-    navController: NavController = rememberNavController(),
-    onBuy: () -> Unit
+    onNavigate: () -> Unit
 ) {
     Card(
         modifier = Modifier
             .padding(vertical = 16.dp, horizontal = 24.dp)
             .fillMaxWidth()
             .wrapContentHeight()
-            .clickable {
-                navController.navigate(Screen.DetailCarScreen.route + "?id=${car.id}")
-            },
+            .clickable(onClick = onNavigate),
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White)
     ) {
@@ -74,17 +68,12 @@ fun ItemCar(
                     TextSubtitleSmall(text = car.name)
                     Spacer(modifier = Modifier.height(4.dp))
                     TextBodyNormal(text = "${car.machine} | ${car.type} | ${car.year}")
-
                 }
-
-//                Button(onClick = onBuy, enabled = textButton != "Purchased") {
-//                    Text(text = textButton)
-//                }
 
                 ButtonComposable(
                     textButton = textButton,
                     enabled = textButton != "Purchased",
-                    onBuy = onBuy
+                    onBuy = onNavigate
                 )
             }
         }

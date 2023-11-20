@@ -3,7 +3,6 @@ package com.febrian.vehiclesales.ui.navigation
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -15,7 +14,6 @@ import com.febrian.vehiclesales.ui.screen.DetailMotorScreen
 import com.febrian.vehiclesales.ui.screen.HomeScreen
 import com.febrian.vehiclesales.ui.screen.ReceiptScreen
 import com.febrian.vehiclesales.ui.screen.VehicleScreen
-import com.febrian.vehiclesales.ui.screen.VehicleViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -24,7 +22,7 @@ fun NavigationSetup(
 ) {
     NavHost(navController, startDestination = Screen.Home.route) {
         composable(BottomNavMenuItem.Home.route) {
-            HomeScreen( navController = navController)
+            HomeScreen(navController = navController)
         }
         composable(BottomNavMenuItem.Transaction.route) {
             ReceiptScreen()
@@ -38,10 +36,13 @@ fun NavigationSetup(
         })) {
             DetailCarScreen(id = it.arguments?.getInt("id") ?: 0, navController = navController)
         }
-        composable(Screen.DetailMotorScreen.route + "?id={id}", arguments = listOf(navArgument("id") {
-            type = NavType.IntType
-            defaultValue = 0
-        })) {
+        composable(
+            Screen.DetailMotorScreen.route + "?id={id}",
+            arguments = listOf(navArgument("id") {
+                type = NavType.IntType
+                defaultValue = 0
+            })
+        ) {
             DetailMotorScreen(it.arguments?.getInt("id") ?: 0, navController = navController)
         }
 

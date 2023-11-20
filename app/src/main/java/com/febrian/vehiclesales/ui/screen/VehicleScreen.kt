@@ -13,18 +13,15 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.febrian.vehiclesales.data.entity.SaleCar
-import com.febrian.vehiclesales.data.entity.SaleMotorCycle
 import com.febrian.vehiclesales.ui.components.TextTitleLarge
 import com.febrian.vehiclesales.ui.item.ItemCar
 import com.febrian.vehiclesales.ui.item.ItemMotorCycle
-import com.febrian.vehiclesales.utils.dateToString
-import java.util.Date
+import com.febrian.vehiclesales.ui.navigation.Screen
 
 @Composable
 fun VehicleScreen(
     vehicleViewModel: VehicleViewModel = hiltViewModel(),
-    navController : NavController = rememberNavController()
+    navController: NavController = rememberNavController()
 ) {
 
     vehicleViewModel.getAllCars(true)
@@ -44,22 +41,14 @@ fun VehicleScreen(
         }
 
         items(listCar.value) {
-            ItemCar("Purchased",  it, navController) {
-                val car = it
-                car.isPurchased = true
-                vehicleViewModel.buyCar(SaleCar(carId = it.id), car)
+            ItemCar("Purchased", it) {
+                navController.navigate(Screen.DetailCarScreen.route + "?id=${it.id}")
             }
         }
 
         items(listMotorCycle.value) {
-            ItemMotorCycle("Purchased", it, navController) {
-                val motor = it
-                motor.isPurchased = true
-                vehicleViewModel.buyMotor(
-                    SaleMotorCycle(motorCycleId = it.id, date = dateToString(Date())),
-                    motor
-                )
-
+            ItemMotorCycle("Purchased", it) {
+                navController.navigate(Screen.DetailMotorScreen.route + "?id=${it.id}")
             }
         }
     }

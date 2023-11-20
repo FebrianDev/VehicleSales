@@ -69,6 +69,7 @@ fun DetailCarScreen(
         }
 
         Spacer(modifier = Modifier.height(16.dp))
+
         Image(
             painter = painterResource(id = R.drawable.car),
             contentDescription = "Car",
@@ -76,10 +77,12 @@ fun DetailCarScreen(
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(12.dp))
         )
+
         Spacer(modifier = Modifier.height(24.dp))
 
         TextSubtitleSmall(text = car.name)
         TextBodyNormal(text = "${car.machine} | ${car.type} | ${car.capacity}")
+
         Row(modifier = Modifier.padding(top = 2.dp)) {
             Box(
                 modifier = Modifier
@@ -89,6 +92,7 @@ fun DetailCarScreen(
             Spacer(modifier = Modifier.width(4.dp))
             TextBodyNormal(text = "Color")
         }
+
         TextBodyNormal(text = "Price: ${car.price}")
         TextBodyNormal(text = "Year: ${car.year}")
 

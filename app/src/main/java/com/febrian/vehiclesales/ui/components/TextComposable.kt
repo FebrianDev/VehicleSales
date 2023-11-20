@@ -33,7 +33,7 @@ fun TextSubtitleSmall(text: String, modifier: Modifier = Modifier) {
         fontWeight = FontWeight.SemiBold,
         fontSize = 16.sp,
         modifier = modifier
-        )
+    )
 }
 
 @Composable

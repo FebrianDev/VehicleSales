@@ -66,7 +66,6 @@ class VehicleViewModel @Inject constructor(private val repository: VehicleReposi
     fun getCarById(id: Int) {
         viewModelScope.launch {
             repository.getCarById(id).onEach {
-                println("CAR2"+it)
                 _getCarById.value = it
             }.stateIn(this, SharingStarted.Eagerly, Car())
         }
